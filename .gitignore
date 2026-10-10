@@ -1,0 +1,35 @@
+# --- project data & artifacts (never commit the dataset or models) ---
+data/
+*.csv
+*.pkl
+*.joblib
+*.pt
+*.keras
+*.h5
+wandb/
+mlruns/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.env
+
+# --- tooling ---
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

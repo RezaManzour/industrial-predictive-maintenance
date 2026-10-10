@@ -1,0 +1,29 @@
+# Python 3.11, CPU-only. Install: pip install -r requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# core
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.5.2
+imbalanced-learn==0.12.4
+
+# classical ML
+xgboost==2.1.1
+lightgbm==4.5.0
+
+# deep learning (CPU wheels)
+torch==2.4.1
+tensorflow-cpu==2.17.0; sys_platform != "darwin"
+tensorflow==2.17.0; sys_platform == "darwin"
+
+# RL environment API
+gymnasium==0.29.1
+
+# viz + notebooks
+matplotlib==3.9.2
+seaborn==0.13.2
+jupyter==1.1.1
+
+# dev
+pytest==8.3.3
+ruff==0.6.9

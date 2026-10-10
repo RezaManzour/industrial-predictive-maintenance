@@ -1,0 +1,23 @@
+[project]
+name = "industrial-predictive-maintenance"
+version = "0.1.0"
+description = "Classical ML vs deep learning vs a tiny RL maintenance policy on AI4I 2020."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Reza Manzour" }]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"*.ipynb" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
