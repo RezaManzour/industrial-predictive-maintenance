@@ -10,8 +10,8 @@ predictions to choose **when to maintain**. One industrial story in three
 parts: classical ML, deep learning (PyTorch, with a TensorFlow/Keras mirror),
 and a small reinforcement-learning maintenance policy, all CPU-only.
 
-> **Status:** Phase 0 (scaffolding). No results yet. Every number in this
-> README will come from a script in this repo, with the command to reproduce it.
+> **Status:** Phase 2 (classical ML) complete. Every number in this README
+> comes from a script in this repo, with the command to reproduce it.
 
 ## Problem
 
@@ -24,9 +24,9 @@ and a small reinforcement-learning maintenance policy, all CPU-only.
 
 | Phase | Scope | Status |
 |---|---|---|
-| 0 | Repo scaffolding, leakage-safe split, metrics, CI | ✅ In Progress |
-| 1 | EDA: imbalance, temperature correlation, tool-wear drift, failure modes | ⏳ Planned |
-| 2 | Classical ML: Dummy / LogReg → RandomForest → XGBoost | ⏳ Planned |
+| 0 | Repo scaffolding, leakage-safe split, metrics, CI | ✅ Done |
+| 1 | EDA: imbalance, temperature correlation, tool-wear drift, failure modes | ✅ Done |
+| 2 | Classical ML: Dummy / LogReg → RandomForest → XGBoost | ✅ Done |
 | 3 | Deep learning: PyTorch MLP with `Type` embedding + Keras mirror | ⏳ Planned |
 | 4 | RL: `MaintenanceEnv` + tabular Q-learning vs threshold vs random | ⏳ Planned |
 | 5 | Results table, limitations, future work | ⏳ Planned |
@@ -42,38 +42,75 @@ and a small reinforcement-learning maintenance policy, all CPU-only.
 - Primary metric: **PR-AUC**. Also ROC-AUC, F1 and recall at fixed precision
   (`src/utils/metrics.py`).
 - Failure-mode flags (TWF, HDF, PWF, OSF, RNF) are excluded from the features
-  because they define the target.
+  because they define the target. `UDI` and `Product ID` are identifiers and
+  are excluded too.
+
+## Results
+
+### Phase 2: classical models (test set, 51 positives)
+
+| Model | PR-AUC | ROC-AUC | F1 @ val threshold | Recall @ Precision ≥ 0.8 | Threshold (from val) |
+|---|---|---|---|---|---|
+| Dummy (most frequent) | 0.034 | 0.500 | 0.066 | 0.000 | 0.000 |
+| Dummy (stratified) | 0.034 | 0.491 | 0.066 | 0.000 | 0.000 |
+| Logistic Regression | 0.443 | 0.937 | 0.444 | 0.020 | 0.906 |
+| **Random Forest** | **0.910** | **0.988** | **0.894** | **0.882** | 0.467 |
+| XGBoost | 0.872 | 0.982 | 0.857 | 0.824 | 0.752 |
+
+Reading these numbers:
+
+- A dummy classifier's PR-AUC equals the positive rate (about 0.034), so it is
+  the floor. The most-frequent dummy predicts "failure" for every row, so its
+  threshold is 0.
+- Random Forest and XGBoost are close. With 51 positives in the test set, a
+  gap of about 0.04 PR-AUC is within noise, so no winner is claimed.
+- Recall at precision 0.8 is a single point on the precision-recall curve
+  and is noisy at this sample size.
+- Hyperparameters were fixed before evaluation and not tuned, so these are
+  untuned baselines.
+
+Reproduce: `python -m src.train_classical` (writes `results/metrics_classical.json`).
+
+Deep learning (Phase 3) and RL (Phase 4) results will be added here when they run.
 
 ## Repository layout
 
+```
 src/
-data/splits.py stratified, leakage-checked split
-features/engineering.py physics-motivated features (Phase 2)
-utils/metrics.py PR-AUC, ROC-AUC, F1@threshold, recall@precision
-notebooks/ EDA (Phase 1)
-reports/figures/ saved figures
-results/ metrics JSON written by training scripts
-tests/ offline tests on synthetic data
+  data/splits.py          stratified, leakage-checked split
+  features/engineering.py physics-motivated features (temp_diff, power_w, strain)
+  models/classical.py     Dummy, LogReg, RandomForest, XGBoost pipelines
+  train_classical.py      Phase 2 training and evaluation CLI
+  utils/metrics.py        PR-AUC, ROC-AUC, F1@threshold, recall@precision
+notebooks/                EDA (Phase 1): 01_eda.ipynb and its script twin
+reports/figures/          saved EDA figures
+results/                  metrics JSON written by training scripts
+tests/                    offline tests on synthetic data
+```
 
 ## Reproduce
 
-```bash  
-python -m venv .venv && source .venv/bin/activate  
-pip install -r requirements-ci.txt  
-pytest tests/ -v  
-Download ai4i2020.csv from
-UCI
-into data/raw/ (the data/ folder is git-ignored). Training commands will
-be added per phase.
+```bash
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+pytest tests/ -v
+```
 
-Results
-To be filled from real runs in Phases 2–4.
+Download `ai4i2020.csv` from
+[UCI](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset)
+into `data/raw/` (the `data/` folder is git-ignored). Then:
 
-Dataset
+```bash
+python -m src.train_classical
+```
+
+## Dataset
+
 S. Matzka, "Explainable Artificial Intelligence for Predictive Maintenance
-Applications," 2020 Third International Conference on Artificial Intelligence
-for Industries (AI4I), 2020, pp. 69–74. Dataset: UCI Machine Learning
+Applications," *2020 Third International Conference on Artificial Intelligence
+for Industries (AI4I)*, 2020, pp. 69–74. Dataset: UCI Machine Learning
 Repository, CC BY 4.0.
 
-License
+## License
+
 MIT
