@@ -38,7 +38,8 @@ and a small reinforcement-learning maintenance policy, all CPU-only.
   stratified row split is leakage-free; `src/data/splits.py` verifies the
   splits are disjoint.
 - Thresholds and hyperparameters are chosen on **val**; **test** is used once
-  per model, for the final table.
+  per model, for the final table. The full rules, seeds and test-use log are in
+  [PROTOCOL.md](PROTOCOL.md).
 - Primary metric: **PR-AUC**. Also ROC-AUC, F1 and recall at fixed precision
   (`src/utils/metrics.py`).
 - Failure-mode flags (TWF, HDF, PWF, OSF, RNF) are excluded from the features
