@@ -70,11 +70,21 @@ def main(
 
         _run("keras_mlp", "tensorflow", fit_keras_mlp, predict_keras_mlp, parts, rows)
 
+    new_names = {r["model"] for r in rows}
+    kept = []
+    if (
+        out_path.exists()
+    ):  # keep models from earlier runs (e.g. torch when running keras)
+        kept = [
+            r
+            for r in json.loads(out_path.read_text())["models"]
+            if r["model"] not in new_names
+        ]
     result = {
         "phase": 3,
         "split": "stratified 70/15/15, seed=42",
         "status": "complete",
-        "models": rows,
+        "models": kept + rows,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(result, indent=2) + "\n")
