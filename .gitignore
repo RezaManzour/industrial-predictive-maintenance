@@ -1,5 +1,5 @@
 # --- project data & artifacts (never commit the dataset or models) ---
-data/
+/data/
 *.csv
 *.pkl
 *.joblib
