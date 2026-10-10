@@ -10,7 +10,7 @@ predictions to choose **when to maintain**. One industrial story in three
 parts: classical ML, deep learning (PyTorch, with a TensorFlow/Keras mirror),
 and a small reinforcement-learning maintenance policy, all CPU-only.
 
-> **Status:** Phase 2 (classical ML) complete. Every number in this README
+> **Status:** Phase 3 (deep learning) complete, with one recorded limitation (see Results). Every number in this README
 > comes from a script in this repo, with the command to reproduce it.
 
 ## Problem
@@ -27,7 +27,7 @@ and a small reinforcement-learning maintenance policy, all CPU-only.
 | 0 | Repo scaffolding, leakage-safe split, metrics, CI | ✅ Done |
 | 1 | EDA: imbalance, temperature correlation, tool-wear drift, failure modes | ✅ Done |
 | 2 | Classical ML: Dummy / LogReg → RandomForest → XGBoost | ✅ Done |
-| 3 | Deep learning: PyTorch MLP with `Type` embedding + Keras mirror | ⏳ Planned |
+| 3 | Deep learning: PyTorch MLP with `Type` embedding + Keras mirror | ✅ Done (Keras test result not recorded) |
 | 4 | RL: `MaintenanceEnv` + tabular Q-learning vs threshold vs random | ⏳ Planned |
 | 5 | Results table, limitations, future work | ⏳ Planned |
 
@@ -71,7 +71,30 @@ Reading these numbers:
 
 Reproduce: `python -m src.train_classical` (writes `results/metrics_classical.json`).
 
-Deep learning (Phase 3) and RL (Phase 4) results will be added here when they run.
+### Phase 3: deep models (test set, 51 positives)
+
+| Model | Framework | PR-AUC | ROC-AUC | F1 @ val threshold | Recall @ Precision ≥ 0.8 | Threshold (from val) |
+|---|---|---|---|---|---|---|
+| PyTorch MLP (`Type` embedding) | PyTorch | 0.720 | 0.981 | 0.684 | 0.471 | 0.895 |
+| Keras MLP (`Type` one-hot) | TensorFlow | not recorded | not recorded | not recorded | not recorded | not recorded |
+
+Validation PR-AUC: PyTorch 0.770, Keras 0.761.
+
+Limitations and disclosures:
+
+- **Keras test result not recorded.** The Keras run was executed with a version of
+  `src/train_deep.py` that overwrote `results/metrics_deep.json` and dropped its
+  row. The Keras test set was scored during that run, but its numbers were not saved.
+  Its validation PR-AUC was recorded. The test set is not scored again, to keep the
+  one-use protocol. The fix is in commit `123ba9f`.
+- The PyTorch model's test PR-AUC (0.720) is lower than its validation PR-AUC (0.770).
+  With 51 test positives, this gap is within noise and is not tuned away.
+- Phase 2's Random Forest remains the best classical model on test (PR-AUC 0.910).
+  The deep models do not beat it on this dataset.
+
+Reproduce the PyTorch result: `python -m src.train_deep --frameworks torch`.
+
+RL (Phase 4) results will be added here when they run.
 
 ## Repository layout
 
