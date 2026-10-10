@@ -1,1 +1,47 @@
-{"phase":2,"split":"stratified 70/15/15, seed=42","status":"not_run","models":[]}
+{
+  "phase": 2,
+  "split": "stratified 70/15/15, seed=42",
+  "status": "complete",
+  "models": [
+    {
+      "model": "dummy_most_frequent",
+      "pr_auc": 0.034,
+      "roc_auc": 0.5,
+      "f1": 0.06576402321083172,
+      "threshold": 0.0,
+      "recall_at_precision_0.8": 0.0
+    },
+    {
+      "model": "dummy_stratified",
+      "pr_auc": 0.033689839572192515,
+      "roc_auc": 0.49117038119595663,
+      "f1": 0.06576402321083172,
+      "threshold": 0.0,
+      "recall_at_precision_0.8": 0.0
+    },
+    {
+      "model": "logistic_regression",
+      "pr_auc": 0.443190509496602,
+      "roc_auc": 0.9371980676328502,
+      "f1": 0.4444444444444444,
+      "threshold": 0.9064298940760989,
+      "recall_at_precision_0.8": 0.0196078431372549
+    },
+    {
+      "model": "random_forest",
+      "pr_auc": 0.9103455482899465,
+      "roc_auc": 0.9882271749279422,
+      "f1": 0.8936170212765957,
+      "threshold": 0.46684115930272885,
+      "recall_at_precision_0.8": 0.8823529411764706
+    },
+    {
+      "model": "xgboost",
+      "pr_auc": 0.8719610357963326,
+      "roc_auc": 0.9816370992841581,
+      "f1": 0.8571428571428571,
+      "threshold": 0.7524046897888184,
+      "recall_at_precision_0.8": 0.8235294117647058
+    }
+  ]
+}
