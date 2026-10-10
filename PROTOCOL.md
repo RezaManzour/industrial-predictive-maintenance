@@ -61,3 +61,6 @@ reason written down. Nothing is tuned on the test split.
 
 - 2026-10-10: protocol written at the start of the two-week plan. Keras test
   result is not recorded and is not re-scored.
+- 2026-10-10: classical models re-run to save validation and test predictions
+  for bootstrap analysis. Test was scored a second time; metrics in
+  `results/metrics_classical.json` were reproduced exactly (no diff).
