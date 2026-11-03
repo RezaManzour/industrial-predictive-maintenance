@@ -9,3 +9,4 @@ data/raw/*
 *.pt
 *.ckpt
 .DS_Store
+*.egg-info/
