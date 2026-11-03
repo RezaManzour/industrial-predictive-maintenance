@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipm"
+version = "0.1.0"
+description = "Predictive maintenance on AI4I 2020: classical ML vs deep models vs a small RL maintenance policy"
+requires-python = ">=3.10"
+dependencies = ["numpy", "pandas", "scikit-learn"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+deep = ["torch"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
