@@ -21,7 +21,7 @@ this repo; see `results/` for the raw outputs.
 - The dataset is synthetic and its failures follow fixed rules. High scores here show that a model can recover
   those rules, not that it would transfer to real plant data.
 
-## Classical results (test set, one split, seed 42)
+## Classical results (single split, seed 42; see multi-seed table below for the number to cite)
 
 Intervals are 95% bootstrap percentile intervals on the test set (1,000 resamples), from
 `results/metrics_classical.json`. The threshold is chosen on validation data only.
@@ -39,6 +39,28 @@ What the intervals support: tree models are clearly better than logistic regress
 non-linear failure rules. Random forest and gradient boosting cannot be ranked against each other, and the gain
 from engineered features is large in the point estimates but the marginal intervals overlap, so a paired
 comparison over several seeds is needed before calling it significant.
+
+## Multi-seed results (5 seeds, mean +/- std over splits)
+
+From `results/metrics_multiseed.json`. Each seed uses a different stratified split and model seed. Test sets
+overlap across seeds, so this is a stability check and not a significance test.
+
+| Model | PR-AUC | F1 |
+|---|---|---|
+| Logistic regression | 0.429 +/- 0.063 | 0.415 +/- 0.023 |
+| Random forest | 0.725 +/- 0.056 | 0.684 +/- 0.037 |
+| Gradient boosting | 0.788 +/- 0.043 | 0.720 +/- 0.025 |
+| Logistic regression + engineered | 0.441 +/- 0.054 | 0.429 +/- 0.050 |
+| Random forest + engineered | 0.873 +/- 0.057 | 0.861 +/- 0.063 |
+| Gradient boosting + engineered | 0.879 +/- 0.051 | 0.850 +/- 0.072 |
+
+Paired differences in PR-AUC (engineered minus base): logistic regression +0.012 (better in 4/5 seeds),
+random forest +0.148 (5/5), gradient boosting +0.090 (5/5). Random forest minus gradient boosting with
+engineered features: -0.005 +/- 0.038 (random forest better in 2/5).
+
+Conclusions the data supports: engineered features help both tree models consistently, with no real effect on
+logistic regression, and the two tree models are indistinguishable. The seed-42 table above (PR-AUC about 0.94 with
+engineered features) was a favourable split; the multi-seed mean is about 0.87-0.88, and that is the number to cite.
 
 ## How to read the classical results
 
