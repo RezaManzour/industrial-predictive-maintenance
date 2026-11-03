@@ -87,6 +87,7 @@ Download the data and run the EDA:
 python scripts/download_data.py
 python -m ipm.eda
 python -m ipm.classical
+python -m ipm.multiseed
 ```
 
 ## Layout

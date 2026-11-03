@@ -29,19 +29,19 @@ from ipm.metrics import best_f1_threshold, bootstrap_ci, imbalance_metrics
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def build_model(name: str, numeric: list[str]) -> Pipeline:
+def build_model(name: str, numeric: list[str], seed: int = SEED) -> Pipeline:
     cat = OneHotEncoder(handle_unknown="ignore")
     if name == "logreg":
         pre = ColumnTransformer([("num", StandardScaler(), numeric), ("cat", cat, CATEGORICAL_FEATURES)])
-        clf = LogisticRegression(class_weight="balanced", max_iter=2000, random_state=SEED)
+        clf = LogisticRegression(class_weight="balanced", max_iter=2000, random_state=seed)
     else:
         pre = ColumnTransformer([("num", "passthrough", numeric), ("cat", cat, CATEGORICAL_FEATURES)])
         if name == "random_forest":
             clf = RandomForestClassifier(
-                n_estimators=300, class_weight="balanced_subsample", n_jobs=-1, random_state=SEED
+                n_estimators=300, class_weight="balanced_subsample", n_jobs=-1, random_state=seed
             )
         elif name == "hist_gb":
-            clf = HistGradientBoostingClassifier(class_weight="balanced", random_state=SEED)
+            clf = HistGradientBoostingClassifier(class_weight="balanced", random_state=seed)
         else:
             raise ValueError(name)
     return Pipeline([("pre", pre), ("clf", clf)])
