@@ -32,7 +32,12 @@ pip install -e ".[dev]"
 pytest -q
 ```
 
-Download `ai4i2020.csv` from the UCI page above into `data/raw/`.
+Download the data and run the EDA:
+
+```bash
+python scripts/download_data.py
+python -m ipm.eda
+```
 
 ## Layout
 

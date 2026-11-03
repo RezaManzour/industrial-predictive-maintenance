@@ -1,0 +1,11 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+
+[deep]
+torch
+
+[dev]
+pytest
+ruff

@@ -7,7 +7,7 @@ name = "ipm"
 version = "0.1.0"
 description = "Predictive maintenance on AI4I 2020: classical ML vs deep models vs a small RL maintenance policy"
 requires-python = ">=3.10"
-dependencies = ["numpy", "pandas", "scikit-learn"]
+dependencies = ["numpy", "pandas", "scikit-learn", "matplotlib"]
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]

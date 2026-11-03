@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/ipm/__init__.py
+src/ipm/data.py
+src/ipm/eda.py
+src/ipm/metrics.py
+src/ipm.egg-info/PKG-INFO
+src/ipm.egg-info/SOURCES.txt
+src/ipm.egg-info/dependency_links.txt
+src/ipm.egg-info/requires.txt
+src/ipm.egg-info/top_level.txt
+tests/test_data.py
+tests/test_eda.py
+tests/test_metrics.py

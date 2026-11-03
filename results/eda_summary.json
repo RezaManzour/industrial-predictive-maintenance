@@ -1,0 +1,28 @@
+{
+  "rows": 10000,
+  "failure_rate": 0.0339,
+  "failures": 339,
+  "missing_values": 0,
+  "duplicate_rows": 0,
+  "failure_rate_by_type": {
+    "H": 0.0209,
+    "L": 0.0392,
+    "M": 0.0277
+  },
+  "failure_mode_counts": {
+    "TWF": 46,
+    "HDF": 115,
+    "PWF": 95,
+    "OSF": 98,
+    "RNF": 19
+  },
+  "failure_without_any_mode_flag": 9,
+  "mode_flag_without_failure": 18,
+  "correlation_with_target": {
+    "Air temperature [K]": 0.0826,
+    "Process temperature [K]": 0.0359,
+    "Rotational speed [rpm]": -0.0442,
+    "Torque [Nm]": 0.1913,
+    "Tool wear [min]": 0.1054
+  }
+}
