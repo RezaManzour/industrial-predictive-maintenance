@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "Industrial Predictive Maintenance on AI4I 2020: classical ML, PyTorch and cost-aware maintenance decisions"
+type: software
+authors:
+  - family-names: "Manzour"
+    given-names: "Reza"
+version: "1.0.0"
+date-released: "2026-11-08"
+license: MIT
+repository-code: "https://github.com/RezaManzour/industrial-predictive-maintenance"
