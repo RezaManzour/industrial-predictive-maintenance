@@ -167,6 +167,21 @@ What this shows:
   better.
 - This is a demonstration of the decision framework on a synthetic dataset, not a deployable maintenance policy.
 
+## Model diagnostics (gradient boosting + engineered features, seed-42 split)
+
+From `results/diagnostics.json`; the model is fitted on the training split and evaluated on the test split.
+
+![Diagnostics](reports/figures/diagnostics.png)
+
+- On this split, precision stays at 1.0 up to a recall of about 0.88 and then falls. Remember that this split gave a
+  higher PR-AUC (0.942) than the 5-seed mean (0.879).
+- Permutation importance (drop in average precision): rotational speed 0.418, temperature gap 0.381, wear x torque
+  0.232, power 0.110, torque 0.071; the raw air and process temperatures are about 0. The two largest features match
+  the heat-dissipation and overstrain failure rules of the dataset.
+- Rotational speed, torque and power are strongly related, so permutation importance divides credit among them and
+  should not be read as a causal ranking. Raw temperatures show zero importance because their information is carried
+  by the temperature gap.
+
 ## How to read the classical results
 
 - **No label leakage.** Features are built from the five sensor columns plus product type only. The target,

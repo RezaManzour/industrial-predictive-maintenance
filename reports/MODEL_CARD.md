@@ -22,6 +22,7 @@ excluded from the features.
 - The engineered features mirror the rules that generated the labels, so the gain shows the rules can be recovered,
   not that the model generalises to real machines.
 - Each test split has about 50 failures, so precision, recall and thresholds are noisy.
-- Probabilities are from a class-weighted model and are not calibrated (see `reports/figures/diagnostics.png` once generated).
+- Probabilities come from a class-weighted model and were checked only coarsely (see the calibration panel of
+  `reports/figures/diagnostics.png`); with about 50 failures per split the check has low resolution.
 - Hyperparameters were not tuned.
 - Costs used in the decision experiments are assumptions.
