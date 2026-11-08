@@ -40,7 +40,7 @@ mean ± std over 5 split seeds.
 - The MLP was not tuned. Costs in the decision and replacement experiments are assumptions.
 - The replacement MDP treats independent snapshots as per-cycle hazards, which is a modelling assumption.
 
-Further detail is in [`reports/REPORT.md`](reports/REPORT.md).
+Further detail: [`reports/REPORT.md`](reports/REPORT.md), [`reports/MODEL_CARD.md`](reports/MODEL_CARD.md), [`reports/DATA_CARD.md`](reports/DATA_CARD.md).
 
 ## Data findings (from `results/eda_summary.json`)
 
@@ -215,8 +215,12 @@ pip install -e ".[deep]"   # PyTorch (CPU)
 python -m ipm.deep
 python -m ipm.cost
 python -m ipm.rl
+python -m ipm.diagnostics
 python -m ipm.report   # regenerates the figures from results/
 ```
+
+`make all` runs lint, tests, every experiment and the figures. `make test` runs the tests with coverage. A `Dockerfile`
+builds an image that runs the test suite, and `.pre-commit-config.yaml` enables lint hooks (`pre-commit install`).
 
 ## Layout
 
