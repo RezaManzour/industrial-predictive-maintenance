@@ -1,0 +1,66 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "model": "hist_gb+eng",
+  "cost_per_machine": {
+    "5": {
+      "act_on_nobody": {
+        "mean": 0.17,
+        "std": 0.0
+      },
+      "act_on_everybody": {
+        "mean": 0.966,
+        "std": 0.0
+      },
+      "f1_threshold": {
+        "mean": 0.04186666666666667,
+        "std": 0.018399275348049266
+      },
+      "cost_threshold": {
+        "mean": 0.0392,
+        "std": 0.016434381305327223
+      }
+    },
+    "10": {
+      "act_on_nobody": {
+        "mean": 0.34,
+        "std": 0.0
+      },
+      "act_on_everybody": {
+        "mean": 0.966,
+        "std": 0.0
+      },
+      "f1_threshold": {
+        "mean": 0.08320000000000001,
+        "std": 0.036894444026167414
+      },
+      "cost_threshold": {
+        "mean": 0.06306666666666666,
+        "std": 0.02383554768268045
+      }
+    },
+    "20": {
+      "act_on_nobody": {
+        "mean": 0.68,
+        "std": 0.0
+      },
+      "act_on_everybody": {
+        "mean": 0.966,
+        "std": 0.0
+      },
+      "f1_threshold": {
+        "mean": 0.16586666666666666,
+        "std": 0.07389091058219995
+      },
+      "cost_threshold": {
+        "mean": 0.11839999999999999,
+        "std": 0.042275813941832566
+      }
+    }
+  }
+}

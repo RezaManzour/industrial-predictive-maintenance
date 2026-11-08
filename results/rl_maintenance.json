@@ -1,0 +1,1028 @@
+{
+  "bin_minutes": 10,
+  "gamma": 0.99,
+  "hazard_train": [
+    0.03173136645962733,
+    0.02661700262927257,
+    0.023643441027637217,
+    0.022447786131996657,
+    0.0226464391066161,
+    0.017048477048477048,
+    0.040949529512403764,
+    0.016455486542443064,
+    0.02544616673648932,
+    0.02710684273709484,
+    0.028378718056137415,
+    0.019298100743187448,
+    0.01457053849577214,
+    0.010976545842217484,
+    0.03112869637650979,
+    0.01689625850340136,
+    0.019298100743187448,
+    0.025006175380815152,
+    0.031589180050718514,
+    0.03841894060995185,
+    0.10470014627011215,
+    0.14040601503759398,
+    0.21467980295566502,
+    0.14556776556776557,
+    0.059897959183673466,
+    0.12168831168831168
+  ],
+  "hazard_heldout": [
+    0.009767441860465118,
+    0.014331550802139038,
+    0.03492537313432836,
+    0.01076923076923077,
+    0.02329113924050633,
+    0.01,
+    0.02329113924050633,
+    0.024052287581699347,
+    0.018356164383561645,
+    0.019705882352941177,
+    0.02374193548387097,
+    0.04654545454545454,
+    0.027368421052631577,
+    0.023439490445859874,
+    0.02358974358974359,
+    0.02374193548387097,
+    0.04057142857142857,
+    0.016144578313253014,
+    0.030993377483443708,
+    0.03688311688311688,
+    0.13428571428571429,
+    0.13281553398058252,
+    0.05469387755102041,
+    0.1775,
+    0.07,
+    0.034
+  ],
+  "cases": {
+    "c_fail=100,c_replace=10": {
+      "run_to_failure": {
+        "train_env": {
+          "cost_per_cycle": 4.825,
+          "failures_per_1000": 48.25,
+          "replacements_per_1000": 0.0
+        },
+        "heldout_env": {
+          "cost_per_cycle": 3.423,
+          "failures_per_1000": 34.23,
+          "replacements_per_1000": 0.0
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "fixed_replace_at_bin_20": {
+        "train_env": {
+          "cost_per_cycle": 2.6745,
+          "failures_per_1000": 23.06,
+          "replacements_per_1000": 36.85
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.59375,
+          "failures_per_1000": 22.345,
+          "replacements_per_1000": 35.925
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "value_iteration_optimal": {
+        "train_env": {
+          "cost_per_cycle": 2.65375,
+          "failures_per_1000": 22.26,
+          "replacements_per_1000": 42.775
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.5753,
+          "failures_per_1000": 21.62,
+          "replacements_per_1000": 41.33
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed0": {
+        "train_env": {
+          "cost_per_cycle": 2.88545,
+          "failures_per_1000": 22.745,
+          "replacements_per_1000": 61.095
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.629,
+          "failures_per_1000": 20.26,
+          "replacements_per_1000": 60.3
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed1": {
+        "train_env": {
+          "cost_per_cycle": 2.77735,
+          "failures_per_1000": 22.09,
+          "replacements_per_1000": 56.835
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.6227,
+          "failures_per_1000": 20.675,
+          "replacements_per_1000": 55.52
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed2": {
+        "train_env": {
+          "cost_per_cycle": 2.77735,
+          "failures_per_1000": 22.09,
+          "replacements_per_1000": 56.835
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.6227,
+          "failures_per_1000": 20.675,
+          "replacements_per_1000": 55.52
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed3": {
+        "train_env": {
+          "cost_per_cycle": 2.77735,
+          "failures_per_1000": 22.09,
+          "replacements_per_1000": 56.835
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.6227,
+          "failures_per_1000": 20.675,
+          "replacements_per_1000": 55.52
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed4": {
+        "train_env": {
+          "cost_per_cycle": 2.77735,
+          "failures_per_1000": 22.09,
+          "replacements_per_1000": 56.835
+        },
+        "heldout_env": {
+          "cost_per_cycle": 2.6227,
+          "failures_per_1000": 20.675,
+          "replacements_per_1000": 55.52
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "c_fail=50,c_replace=10": {
+      "run_to_failure": {
+        "train_env": {
+          "cost_per_cycle": 2.4125,
+          "failures_per_1000": 48.25,
+          "replacements_per_1000": 0.0
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.7115,
+          "failures_per_1000": 34.23,
+          "replacements_per_1000": 0.0
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "fixed_replace_at_bin_20": {
+        "train_env": {
+          "cost_per_cycle": 1.5215,
+          "failures_per_1000": 23.06,
+          "replacements_per_1000": 36.85
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.4765,
+          "failures_per_1000": 22.345,
+          "replacements_per_1000": 35.925
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "value_iteration_optimal": {
+        "train_env": {
+          "cost_per_cycle": 1.5215,
+          "failures_per_1000": 23.06,
+          "replacements_per_1000": 36.85
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.4765,
+          "failures_per_1000": 22.345,
+          "replacements_per_1000": 35.925
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed0": {
+        "train_env": {
+          "cost_per_cycle": 1.57085,
+          "failures_per_1000": 22.255,
+          "replacements_per_1000": 45.81
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.5274,
+          "failures_per_1000": 21.72,
+          "replacements_per_1000": 44.14
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed1": {
+        "train_env": {
+          "cost_per_cycle": 1.57085,
+          "failures_per_1000": 22.255,
+          "replacements_per_1000": 45.81
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.5274,
+          "failures_per_1000": 21.72,
+          "replacements_per_1000": 44.14
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed2": {
+        "train_env": {
+          "cost_per_cycle": 1.57085,
+          "failures_per_1000": 22.255,
+          "replacements_per_1000": 45.81
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.5274,
+          "failures_per_1000": 21.72,
+          "replacements_per_1000": 44.14
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed3": {
+        "train_env": {
+          "cost_per_cycle": 1.57085,
+          "failures_per_1000": 22.255,
+          "replacements_per_1000": 45.81
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.5274,
+          "failures_per_1000": 21.72,
+          "replacements_per_1000": 44.14
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "q_learning_seed4": {
+        "train_env": {
+          "cost_per_cycle": 1.54075,
+          "failures_per_1000": 22.26,
+          "replacements_per_1000": 42.775
+        },
+        "heldout_env": {
+          "cost_per_cycle": 1.4943,
+          "failures_per_1000": 21.62,
+          "replacements_per_1000": 41.33
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "c_fail=200,c_replace=10": {
+      "run_to_failure": {
+        "train_env": {
+          "cost_per_cycle": 9.65,
+          "failures_per_1000": 48.25,
+          "replacements_per_1000": 0.0
+        },
+        "heldout_env": {
+          "cost_per_cycle": 6.846,
+          "failures_per_1000": 34.23,
+          "replacements_per_1000": 0.0
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "fixed_replace_at_bin_16": {
+        "train_env": {
+          "cost_per_cycle": 4.93025,
+          "failures_per_1000": 22.205,
+          "replacements_per_1000": 48.925
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.6071,
+          "failures_per_1000": 20.625,
+          "replacements_per_1000": 48.21
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "value_iteration_optimal": {
+        "train_env": {
+          "cost_per_cycle": 4.87975,
+          "failures_per_1000": 22.26,
+          "replacements_per_1000": 42.775
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.7373,
+          "failures_per_1000": 21.62,
+          "replacements_per_1000": 41.33
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed0": {
+        "train_env": {
+          "cost_per_cycle": 5.4813,
+          "failures_per_1000": 20.725,
+          "replacements_per_1000": 133.63
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.31095,
+          "failures_per_1000": 14.78,
+          "replacements_per_1000": 135.495
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed1": {
+        "train_env": {
+          "cost_per_cycle": 5.4813,
+          "failures_per_1000": 20.725,
+          "replacements_per_1000": 133.63
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.31095,
+          "failures_per_1000": 14.78,
+          "replacements_per_1000": 135.495
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed2": {
+        "train_env": {
+          "cost_per_cycle": 5.4813,
+          "failures_per_1000": 20.725,
+          "replacements_per_1000": 133.63
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.31095,
+          "failures_per_1000": 14.78,
+          "replacements_per_1000": 135.495
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed3": {
+        "train_env": {
+          "cost_per_cycle": 5.4813,
+          "failures_per_1000": 20.725,
+          "replacements_per_1000": 133.63
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.31095,
+          "failures_per_1000": 14.78,
+          "replacements_per_1000": 135.495
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "q_learning_seed4": {
+        "train_env": {
+          "cost_per_cycle": 5.4813,
+          "failures_per_1000": 20.725,
+          "replacements_per_1000": 133.63
+        },
+        "heldout_env": {
+          "cost_per_cycle": 4.31095,
+          "failures_per_1000": 14.78,
+          "replacements_per_1000": 135.495
+        },
+        "policy": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  }
+}

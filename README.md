@@ -131,6 +131,8 @@ python -m ipm.classical
 python -m ipm.multiseed
 pip install -e ".[deep]"   # PyTorch (CPU)
 python -m ipm.deep
+python -m ipm.cost
+python -m ipm.rl
 ```
 
 ## Layout
