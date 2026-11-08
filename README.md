@@ -1,5 +1,7 @@
 # Industrial Predictive Maintenance
 
+[![ci](https://github.com/RezaManzour/industrial-predictive-maintenance/actions/workflows/ci.yml/badge.svg)](https://github.com/RezaManzour/industrial-predictive-maintenance/actions/workflows/ci.yml)
+
 Failure prediction and maintenance decisions on the
 [AI4I 2020 Predictive Maintenance dataset](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset)
 (10,000 machine records, about 3.4% failures). The project compares classical machine learning with a PyTorch
@@ -185,12 +187,16 @@ What this shows:
 
 ## Evaluation protocol
 
-- Stratified 70/15/15 train/validation/test split, fixed seed (42).
+- Stratified 70/15/15 train/validation/test split. The single-split table uses seed 42; the multi-seed, deep, cost
+  and RL experiments use split seeds 0-4, with the same seed for every model so comparisons are paired.
 - Failure-mode flags (TWF, HDF, PWF, OSF, RNF) and identifiers are never used as features, since they leak the label.
 - Primary metric: PR-AUC. Also precision, recall and F1 at a threshold chosen on validation data only.
-- The test set is used once per final model.
+- Early stopping (MLP) and all thresholds use validation data only.
+- The test set is used once per model and seed.
 
 ## Setup
+
+Python 3.10 or newer.
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
@@ -221,6 +227,13 @@ tests/          unit tests
 results/        saved metrics (JSON)
 reports/        figures and written report
 ```
+
+## Data and reproducibility
+
+The dataset is not redistributed; `scripts/download_data.py` fetches it from the UCI repository. It is described in
+S. Matzka, "Explainable Artificial Intelligence for Predictive Maintenance Applications", 2020 Third International
+Conference on Artificial Intelligence for Industries (AI4I). Exact package versions used for the saved results are
+recorded in `requirements-lock.txt`. Results can differ slightly across library versions.
 
 ## License
 
