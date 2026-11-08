@@ -1,13 +1,44 @@
 # Industrial Predictive Maintenance
 
-Predicting machine failures on the [AI4I 2020 Predictive Maintenance dataset](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset)
-(10,000 rows, about 3.4% failures). The project compares classical machine learning with deep models
-(PyTorch) and adds a small reinforcement-learning maintenance policy. Everything runs on CPU.
+Failure prediction and maintenance decisions on the
+[AI4I 2020 Predictive Maintenance dataset](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset)
+(10,000 machine records, about 3.4% failures). The project compares classical machine learning with a PyTorch
+neural network under one evaluation protocol, adds cost-aware decision thresholds, and solves a small
+tool-replacement problem with tabular Q-learning checked against the exact solution. Everything runs on CPU.
 
-## Status
+## Key results
 
-Done so far: scaffold, leakage-safe split, metrics, EDA, classical baselines, multi-seed comparison and a PyTorch MLP baseline. Next: final figures, repository polish and a written report. Model numbers are added to this README only after they are produced by code in
-this repo; see `results/` for the raw outputs.
+All numbers come from code in this repository and are saved in `results/`. PR-AUC on the held-out test split,
+mean ± std over 5 split seeds.
+
+| Model | PR-AUC |
+|---|---|
+| Logistic regression | 0.429 ± 0.063 |
+| Random forest + engineered features | 0.873 ± 0.057 |
+| Gradient boosting + engineered features | 0.879 ± 0.051 |
+| PyTorch MLP + engineered features | 0.749 ± 0.066 |
+
+- Tree models beat logistic regression clearly. Random forest and gradient boosting cannot be ranked against each other.
+- Engineered physical features (power, temperature gap, wear x torque) help tree models consistently, in 5 of 5
+  seeds. They mirror the rules that generated this synthetic dataset, so this shows the rules can be recovered, not
+  that the model would transfer to real plants.
+- An untuned MLP is clearly worse than gradient boosting here (0 of 5 seeds better).
+- Choosing the decision threshold by cost lowers expected cost compared with the F1-optimal threshold when a missed
+  failure is much more expensive than an unnecessary action.
+- For tool replacement, a simple wear threshold is almost as good as the exact optimum, and Q-learning does not beat it.
+
+![Model comparison](reports/figures/model_comparison.png)
+![Cost of decision rules](reports/figures/cost_thresholds.png)
+![Hazard and optimal replacement point](reports/figures/rl_hazard_policy.png)
+
+## Limitations
+
+- The dataset is synthetic and its failures follow fixed rules, so high scores do not imply real-world performance.
+- Small test set (about 50 failures per split); only 5 split seeds, and test sets overlap across seeds.
+- The MLP was not tuned. Costs in the decision and replacement experiments are assumptions.
+- The replacement MDP treats independent snapshots as per-cycle hazards, which is a modelling assumption.
+
+Further detail is in [`reports/REPORT.md`](reports/REPORT.md).
 
 ## Data findings (from `results/eda_summary.json`)
 
@@ -159,14 +190,6 @@ What this shows:
 - Primary metric: PR-AUC. Also precision, recall and F1 at a threshold chosen on validation data only.
 - The test set is used once per final model.
 
-## Roadmap
-
-1. EDA and baselines
-2. Classical models (logistic regression, random forest, gradient boosting), with and without engineered features
-3. Deep models (MLP and variants) with the same protocol
-4. Cost-aware threshold selection and a small RL maintenance policy
-5. Final report and honest comparison
-
 ## Setup
 
 ```bash
@@ -186,17 +209,17 @@ pip install -e ".[deep]"   # PyTorch (CPU)
 python -m ipm.deep
 python -m ipm.cost
 python -m ipm.rl
+python -m ipm.report   # regenerates the figures from results/
 ```
 
 ## Layout
 
 ```
-src/ipm/        data loading, splits, metrics
+src/ipm/        data, features, models, cost thresholds, RL, report figures
+scripts/        data download
 tests/          unit tests
-notebooks/      exploration
-configs/        experiment settings
-results/        saved metrics
-reports/        figures and write-ups
+results/        saved metrics (JSON)
+reports/        figures and written report
 ```
 
 ## License
