@@ -178,6 +178,12 @@ From `results/diagnostics.json`; the model is fitted on the training split and e
 - Permutation importance (drop in average precision): rotational speed 0.418, temperature gap 0.381, wear x torque
   0.232, power 0.110, torque 0.071; the raw air and process temperatures are about 0. The two largest features match
   the heat-dissipation and overstrain failure rules of the dataset.
+- Calibration (fixed probability bins, test split of 1,500 rows): the scores are almost two-valued. 1,383 rows
+  score below 0.01 (mean predicted 0.0003, observed failure rate 0.0014, 2 failures) and 48 rows score above 0.5
+  (mean predicted 0.985, observed 0.958). The 69 rows in between are too few to judge, but in the 0.2-0.5 bin none of
+  19 rows failed while about 6 were expected, which hints at overestimated probabilities in the middle range.
+  Treat the scores as a ranking and not as calibrated probabilities; recalibration (Platt or isotonic on validation
+  data) was not done.
 - Rotational speed, torque and power are strongly related, so permutation importance divides credit among them and
   should not be read as a causal ranking. Raw temperatures show zero importance because their information is carried
   by the temperature gap.

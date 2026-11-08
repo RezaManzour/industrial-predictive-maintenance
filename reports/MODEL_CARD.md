@@ -22,7 +22,8 @@ excluded from the features.
 - The engineered features mirror the rules that generated the labels, so the gain shows the rules can be recovered,
   not that the model generalises to real machines.
 - Each test split has about 50 failures, so precision, recall and thresholds are noisy.
-- Probabilities come from a class-weighted model and were checked only coarsely (see the calibration panel of
-  `reports/figures/diagnostics.png`); with about 50 failures per split the check has low resolution.
+- Scores are nearly two-valued and not calibrated probabilities: on the seed-42 test split, 1,383 of 1,500 rows score
+  below 0.01 (observed failure rate 0.0014) and 48 score above 0.5 (mean predicted 0.985, observed 0.958); in the 0.2-0.5
+  bin none of 19 rows failed while about 6 were expected. Use the scores for ranking; recalibration was not done.
 - Hyperparameters were not tuned.
 - Costs used in the decision experiments are assumptions.
