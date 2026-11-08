@@ -6,8 +6,7 @@ Predicting machine failures on the [AI4I 2020 Predictive Maintenance dataset](ht
 
 ## Status
 
-Phases 0-3 done: scaffold, leakage-safe split, metrics, EDA. Phase 4 adds classical baselines (code in
-`src/ipm/classical.py`). Model numbers are added to this README only after they are produced by code in
+Done so far: scaffold, leakage-safe split, metrics, EDA, classical baselines, multi-seed comparison and a PyTorch MLP baseline. Next: cost-aware threshold and a small RL maintenance policy. Model numbers are added to this README only after they are produced by code in
 this repo; see `results/` for the raw outputs.
 
 ## Data findings (from `results/eda_summary.json`)
@@ -62,6 +61,26 @@ Conclusions the data supports: engineered features help both tree models consist
 logistic regression, and the two tree models are indistinguishable. The seed-42 table above (PR-AUC about 0.94 with
 engineered features) was a favourable split; the multi-seed mean is about 0.87-0.88, and that is the number to cite.
 
+## Deep model results (PyTorch MLP, CPU, 5 seeds)
+
+From `results/metrics_deep.json`. Same splits, protocol and seeds as the multi-seed classical table. The network
+is a 64-32-1 MLP with dropout 0.1, class-weighted loss, Adam (lr 1e-3), early stopping on validation PR-AUC. No
+hyperparameter tuning was done.
+
+| Model | PR-AUC | F1 |
+|---|---|---|
+| MLP | 0.729 +/- 0.040 | 0.682 +/- 0.044 |
+| MLP + engineered | 0.749 +/- 0.066 | 0.686 +/- 0.064 |
+| Gradient boosting + engineered (reference) | 0.879 +/- 0.051 | 0.850 +/- 0.072 |
+
+Paired difference in PR-AUC, MLP + engineered minus gradient boosting + engineered: -0.130 +/- 0.029, with the
+MLP better in 0 of 5 seeds.
+
+What this supports: with these untuned settings the MLP is clearly worse than gradient boosting on this dataset,
+and is roughly on par with an untuned random forest without engineered features. Engineered features help the MLP
+little (+0.02 PR-AUC, smaller than the seed-to-seed spread). This is a result for one small architecture on about
+240 training failures, not a general statement about deep learning; a tuned or differently designed network was not tried.
+
 ## How to read the classical results
 
 - **No label leakage.** Features are built from the five sensor columns plus product type only. The target,
@@ -110,6 +129,8 @@ python scripts/download_data.py
 python -m ipm.eda
 python -m ipm.classical
 python -m ipm.multiseed
+pip install -e ".[deep]"   # PyTorch (CPU)
+python -m ipm.deep
 ```
 
 ## Layout
