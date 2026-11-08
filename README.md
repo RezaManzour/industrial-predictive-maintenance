@@ -6,7 +6,7 @@ Predicting machine failures on the [AI4I 2020 Predictive Maintenance dataset](ht
 
 ## Status
 
-Done so far: scaffold, leakage-safe split, metrics, EDA, classical baselines, multi-seed comparison and a PyTorch MLP baseline. Next: cost-aware threshold and a small RL maintenance policy. Model numbers are added to this README only after they are produced by code in
+Done so far: scaffold, leakage-safe split, metrics, EDA, classical baselines, multi-seed comparison and a PyTorch MLP baseline. Next: final figures, repository polish and a written report. Model numbers are added to this README only after they are produced by code in
 this repo; see `results/` for the raw outputs.
 
 ## Data findings (from `results/eda_summary.json`)
@@ -80,6 +80,59 @@ What this supports: with these untuned settings the MLP is clearly worse than gr
 and is roughly on par with an untuned random forest without engineered features. Engineered features help the MLP
 little (+0.02 PR-AUC, smaller than the seed-to-seed spread). This is a result for one small architecture on about
 240 training failures, not a general statement about deep learning; a tuned or differently designed network was not tried.
+
+## Cost-aware thresholds (hist_gb + engineered features, 5 seeds)
+
+Cost per machine on the test split, mean ± std over seeds, from `results/cost_thresholds.json`. A missed failure
+costs `c_fn` and an unnecessary action costs 1. These costs are assumptions, so three ratios are shown.
+
+| c_fn / c_fp | Act on nobody | Act on everybody | F1-optimal threshold | Cost-optimal threshold |
+|---|---|---|---|---|
+| 5 | 0.170 ± 0.000 | 0.966 ± 0.000 | 0.042 ± 0.018 | 0.039 ± 0.016 |
+| 10 | 0.340 ± 0.000 | 0.966 ± 0.000 | 0.083 ± 0.037 | 0.063 ± 0.024 |
+| 20 | 0.680 ± 0.000 | 0.966 ± 0.000 | 0.166 ± 0.074 | 0.118 ± 0.042 |
+
+Choosing the threshold by cost instead of F1 lowers the average cost, by little at ratio 5 (inside the seed spread)
+and more at ratios 10 and 20. Both are far cheaper than acting on nobody or on everybody. The seed-to-seed spread is
+large, so these are indications from one dataset and not a precise saving.
+
+## Tool-replacement policy (tabular Q-learning vs exact solution)
+
+`src/ipm/rl.py` defines a small MDP over tool-wear bins (10 minutes each) with two actions, keep running or replace
+the tool. The per-cycle failure probability at each wear level is estimated from AI4I rows, which are independent
+snapshots and not time series, so treating that rate as a per-cycle hazard is a modelling assumption. Costs are
+assumed. Because the MDP is tiny and known, the exact optimum is computed by value iteration and used to check
+Q-learning. The "held-out" environment uses hazards estimated from the validation and test splits (about 100 failures
+over 26 bins), so it is noisy.
+
+| Costs (failure / replacement) | Policy | Cost per cycle, training-hazard env | Cost per cycle, held-out-hazard env |
+|---|---|---|---|
+| 100 / 10 | Run to failure | 4.825 | 3.423 |
+| 100 / 10 | Best fixed replacement (wear bin 20) | 2.675 | 2.594 |
+| 100 / 10 | Exact optimum (value iteration) | 2.654 | 2.575 |
+| 100 / 10 | Q-learning (mean of 5 seeds) | 2.799 | 2.624 |
+| 50 / 10 | Run to failure | 2.413 | 1.712 |
+| 50 / 10 | Best fixed replacement (wear bin 20) | 1.522 | 1.476 |
+| 50 / 10 | Exact optimum (value iteration) | 1.522 | 1.476 |
+| 50 / 10 | Q-learning (mean of 5 seeds) | 1.565 | 1.521 |
+| 200 / 10 | Run to failure | 9.650 | 6.846 |
+| 200 / 10 | Best fixed replacement (wear bin 16) | 4.930 | 4.607 |
+| 200 / 10 | Exact optimum (value iteration) | 4.880 | 4.737 |
+| 200 / 10 | Q-learning (mean of 5 seeds) | 5.481 | 4.311 |
+
+What this shows:
+
+- The estimated hazard is roughly flat (about 2-3% per cycle) until about 200 minutes of wear and then rises
+  to 10-20%. The exact optimum therefore replaces the tool at about 180-200 minutes of wear, depending on the costs.
+- A single fixed replacement rule is almost as good as the exact optimum, so a simple wear threshold already
+  captures nearly all of the benefit.
+- Q-learning (400k steps, not tuned) reaches a policy that is 2-12% more expensive than the exact optimum in the
+  training environment, and replaces too often when failures are very costly (200 / 10). It does not beat
+  value iteration, which is expected for a small known MDP.
+- In the held-out environment some Q-learning results look better than the exact optimum. That comes from noise
+  in the held-out hazard estimates (the optimum was computed for the training hazards), not from Q-learning being
+  better.
+- This is a demonstration of the decision framework on a synthetic dataset, not a deployable maintenance policy.
 
 ## How to read the classical results
 
