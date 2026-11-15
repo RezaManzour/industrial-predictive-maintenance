@@ -1,12 +1,20 @@
 # Industrial Predictive Maintenance
 
 [![ci](https://github.com/RezaManzour/industrial-predictive-maintenance/actions/workflows/ci.yml/badge.svg)](https://github.com/RezaManzour/industrial-predictive-maintenance/actions/workflows/ci.yml)
+[![Python 3.10 | 3.11 | 3.12 | 3.13](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Release](https://img.shields.io/github/v/tag/RezaManzour/industrial-predictive-maintenance?label=release)](https://github.com/RezaManzour/industrial-predictive-maintenance/tags)
+[![License: MIT](https://img.shields.io/github/license/RezaManzour/industrial-predictive-maintenance)](LICENSE)
 
 Failure prediction and maintenance decisions on the
 [AI4I 2020 Predictive Maintenance dataset](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset)
 (10,000 machine records, about 3.4% failures). The project compares classical machine learning with a PyTorch
 neural network under one evaluation protocol, adds cost-aware decision thresholds, and solves a small
 tool-replacement problem with tabular Q-learning checked against the exact solution. Everything runs on CPU.
+
+**Contents:** [Key results](#key-results) · [Limitations](#limitations) · [Multi-seed results](#multi-seed-results-5-seeds-mean---std-over-splits) · [Deep model](#deep-model-results-pytorch-mlp-cpu-5-seeds) · [Cost-aware thresholds](#cost-aware-thresholds-hist_gb--engineered-features-5-seeds) · [RL policy](#tool-replacement-policy-tabular-q-learning-vs-exact-solution) · [Protocol](#evaluation-protocol) · [Setup](#setup) · [Reproducibility](#data-and-reproducibility)
+
+Full write-up: [reports/REPORT.md](reports/REPORT.md) · [Model card](reports/MODEL_CARD.md) · [Data card](reports/DATA_CARD.md)
 
 ## Key results
 
@@ -260,6 +268,16 @@ S. Matzka, "Explainable Artificial Intelligence for Predictive Maintenance Appli
 Conference on Artificial Intelligence for Industries (AI4I). Exact package versions used for the saved results are
 recorded in `requirements-lock.txt`. Results can differ slightly across library versions.
 
+## Citing
+
+Please cite this repository with the metadata in [`CITATION.cff`](CITATION.cff) (the **Cite this repository** button
+on GitHub). Changes between versions are listed in [`CHANGELOG.md`](CHANGELOG.md).
+
+## Contributing
+
+Issues and pull requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+Security problems: see [SECURITY.md](SECURITY.md).
+
 ## License
 
-MIT
+[MIT](LICENSE). The AI4I 2020 dataset is not part of this repository; see its own terms at the UCI repository.
