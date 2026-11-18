@@ -1,4 +1,4 @@
-.PHONY: install test lint results figures all
+.PHONY: install test lint data results figures all
 install:
 	pip install -e ".[dev,deep]"
 
